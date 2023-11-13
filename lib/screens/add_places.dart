@@ -1,4 +1,7 @@
+import 'package:favorite_places/cubits/places_cubit.dart';
+import 'package:favorite_places/models/places.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddPlaces extends StatefulWidget {
   const AddPlaces({super.key});
@@ -35,6 +38,10 @@ class _AddPlacesState extends State<AddPlaces> {
             TextField(
               controller: _controller,
               decoration: const InputDecoration(labelText: 'Title'),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 16,
+              ),
             ),
             const SizedBox(
               height: 16,
@@ -43,7 +50,14 @@ class _AddPlacesState extends State<AddPlaces> {
               constraints: const BoxConstraints(maxWidth: 150),
               child: Center(
                 child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      final cubit = BlocProvider.of<PlacesCubit>(context);
+
+                      cubit.addPlace(
+                        Place(name: _controller.text),
+                      );
+                      Navigator.pop(context);
+                    },
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,

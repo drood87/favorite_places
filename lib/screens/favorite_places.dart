@@ -1,5 +1,9 @@
+import 'package:favorite_places/cubits/places_cubit.dart';
+import 'package:favorite_places/models/places.dart';
 import 'package:favorite_places/screens/add_places.dart';
+import 'package:favorite_places/widgets/places_list.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FavoritePlaces extends StatelessWidget {
   const FavoritePlaces({super.key});
@@ -25,6 +29,16 @@ class FavoritePlaces extends StatelessWidget {
             },
           ),
         ],
+      ),
+      body: BlocBuilder<PlacesCubit, List<Place>>(
+        builder: (context, state) => state.isNotEmpty
+            ? PlacesList(places: state)
+            : const Center(
+                child: Text(
+                  'No places added yet, go out and explore!',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
       ),
     );
   }
