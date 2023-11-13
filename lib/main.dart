@@ -30,7 +30,10 @@ final theme = ThemeData().copyWith(
 
 void main() {
   runApp(
-    const MyApp(),
+    BlocProvider(
+      create: (BuildContext context) => PlacesCubit(),
+      child: const MyApp(),
+    ),
   );
 }
 
@@ -39,13 +42,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => PlacesCubit(),
-      child: MaterialApp(
-        title: 'Great Places',
-        theme: theme,
-        home: const FavoritePlaces(),
-      ),
+    return MaterialApp(
+      title: 'Great Places',
+      theme: theme,
+      home: const FavoritePlaces(),
     );
   }
 }
