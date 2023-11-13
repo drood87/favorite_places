@@ -1,5 +1,5 @@
 import 'package:favorite_places/cubits/places_cubit.dart';
-import 'package:favorite_places/models/places.dart';
+import 'package:favorite_places/models/place.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,6 +53,9 @@ class _AddPlacesState extends State<AddPlaces> {
                     onPressed: () {
                       final cubit = BlocProvider.of<PlacesCubit>(context);
 
+                      if (_controller.text.isEmpty) {
+                        return;
+                      }
                       cubit.addPlace(
                         Place(name: _controller.text),
                       );

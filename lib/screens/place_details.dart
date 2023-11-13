@@ -1,4 +1,4 @@
-import 'package:favorite_places/models/places.dart';
+import 'package:favorite_places/models/place.dart';
 import 'package:flutter/material.dart';
 
 class PlaceDetails extends StatelessWidget {
@@ -9,10 +9,11 @@ class PlaceDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(place.name),
-      ),
-      body: const Placeholder(),
-    );
+        appBar: AppBar(
+          title: Text(place.name),
+        ),
+        body: Center(
+          child: Text(place.name),
+        ));
   }
 }
