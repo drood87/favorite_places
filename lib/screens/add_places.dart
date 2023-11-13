@@ -1,5 +1,6 @@
 import 'package:favorite_places/cubits/places_cubit.dart';
 import 'package:favorite_places/models/place.dart';
+import 'package:favorite_places/widgets/image_input.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -43,6 +44,10 @@ class _AddPlacesState extends State<AddPlaces> {
                 fontSize: 16,
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            ImageInput(),
             const SizedBox(
               height: 16,
             ),
