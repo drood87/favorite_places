@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:favorite_places/cubits/places_cubit.dart';
 import 'package:favorite_places/models/place.dart';
 import 'package:favorite_places/widgets/image_input.dart';
@@ -13,6 +15,7 @@ class AddPlaces extends StatefulWidget {
 
 class _AddPlacesState extends State<AddPlaces> {
   late TextEditingController _controller;
+  File? _selectedImage;
 
   @override
   void initState() {
@@ -47,7 +50,9 @@ class _AddPlacesState extends State<AddPlaces> {
             const SizedBox(
               height: 10,
             ),
-            ImageInput(),
+            ImageInput(
+              onPickImage: (image) => _selectedImage = image,
+            ),
             const SizedBox(
               height: 16,
             ),
@@ -59,11 +64,15 @@ class _AddPlacesState extends State<AddPlaces> {
                   onPressed: () {
                     final cubit = BlocProvider.of<PlacesCubit>(context);
 
-                    if (_controller.text.isEmpty) {
+                    if (_controller.text.isEmpty || _selectedImage == null) {
                       return;
                     }
+
                     cubit.addPlace(
-                      Place(name: _controller.text),
+                      Place(
+                        name: _controller.text,
+                        image: _selectedImage!,
+                      ),
                     );
                     Navigator.pop(context);
                   },
