@@ -32,7 +32,10 @@ class FavoritePlaces extends StatelessWidget {
       ),
       body: BlocBuilder<PlacesCubit, List<Place>>(
         builder: (context, state) => state.isNotEmpty
-            ? PlacesList(places: state)
+            ? Padding(
+                padding: const EdgeInsets.all(8),
+                child: PlacesList(places: state),
+              )
             : Center(
                 child: Text(
                   'No places added yet, go out and explore!',
