@@ -13,7 +13,12 @@ class PlaceDetails extends StatelessWidget {
           title: Text(place.name),
         ),
         body: Center(
-          child: Text(place.name),
+          child: Text(
+            place.name,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  color: Theme.of(context).colorScheme.onBackground,
+                ),
+          ),
         ));
   }
 }
