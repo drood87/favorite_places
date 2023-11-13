@@ -31,15 +31,15 @@ class _AddPlacesState extends State<AddPlaces> {
       appBar: AppBar(
         title: const Text('Add new Place'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(12),
         child: Column(
           children: <Widget>[
             TextField(
               controller: _controller,
               decoration: const InputDecoration(labelText: 'Title'),
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: Theme.of(context).colorScheme.onBackground,
                 fontSize: 16,
               ),
             ),
@@ -49,27 +49,21 @@ class _AddPlacesState extends State<AddPlaces> {
             ConstrainedBox(
               constraints: const BoxConstraints(maxWidth: 150),
               child: Center(
-                child: ElevatedButton(
-                    onPressed: () {
-                      final cubit = BlocProvider.of<PlacesCubit>(context);
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    final cubit = BlocProvider.of<PlacesCubit>(context);
 
-                      if (_controller.text.isEmpty) {
-                        return;
-                      }
-                      cubit.addPlace(
-                        Place(name: _controller.text),
-                      );
-                      Navigator.pop(context);
-                    },
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Icon(Icons.add),
-                        SizedBox(width: 10),
-                        Text('Add Place'),
-                      ],
-                    )),
+                    if (_controller.text.isEmpty) {
+                      return;
+                    }
+                    cubit.addPlace(
+                      Place(name: _controller.text),
+                    );
+                    Navigator.pop(context);
+                  },
+                  label: const Text('Add Place'),
+                ),
               ),
             )
           ],
