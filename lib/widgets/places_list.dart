@@ -7,11 +7,12 @@ class PlacesList extends StatelessWidget {
 
   const PlacesList({required this.places, super.key});
 
-  _placeDetails(BuildContext context, Place place) {
+  _placeDetails(BuildContext context, Place place, int index) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (_) => PlaceDetails(
           place: place,
+          placeIndex: index,
         ),
       ),
     );
@@ -23,10 +24,17 @@ class PlacesList extends StatelessWidget {
       itemCount: places.length,
       itemBuilder: (context, index) {
         return ListTile(
-          onTap: () => _placeDetails(context, places[index]),
+          onTap: () => _placeDetails(context, places[index], index),
           leading: CircleAvatar(
             radius: 26,
             backgroundImage: FileImage(places[index].image),
+          ),
+          subtitle: Text(
+            places[index].location.address,
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .copyWith(color: Theme.of(context).colorScheme.onBackground),
           ),
           title: Text(
             places[index].name,

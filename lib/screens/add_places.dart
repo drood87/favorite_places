@@ -17,6 +17,7 @@ class AddPlaces extends StatefulWidget {
 class _AddPlacesState extends State<AddPlaces> {
   late TextEditingController _controller;
   File? _selectedImage;
+  PlaceLocation? _selectedLocation;
 
   @override
   void initState() {
@@ -57,7 +58,11 @@ class _AddPlacesState extends State<AddPlaces> {
             const SizedBox(
               height: 16,
             ),
-            const LocationInput(),
+            LocationInput(
+              onSelectLocation: (location) {
+                _selectedLocation = location;
+              },
+            ),
             const SizedBox(
               height: 16,
             ),
@@ -69,7 +74,9 @@ class _AddPlacesState extends State<AddPlaces> {
                   onPressed: () {
                     final cubit = BlocProvider.of<PlacesCubit>(context);
 
-                    if (_controller.text.isEmpty || _selectedImage == null) {
+                    if (_controller.text.isEmpty ||
+                        _selectedImage == null ||
+                        _selectedLocation == null) {
                       return;
                     }
 
@@ -77,8 +84,10 @@ class _AddPlacesState extends State<AddPlaces> {
                       Place(
                         name: _controller.text,
                         image: _selectedImage!,
+                        location: _selectedLocation!,
                       ),
                     );
+
                     Navigator.pop(context);
                   },
                   label: const Text('Add Place'),
