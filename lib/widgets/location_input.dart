@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:favorite_places/env/env.dart';
 import 'package:favorite_places/models/place.dart';
