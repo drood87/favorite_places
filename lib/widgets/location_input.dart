@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:favorite_places/env/env.dart';
 import 'package:favorite_places/models/place.dart';
@@ -68,6 +69,7 @@ class _LocationInputState extends State<LocationInput> {
     if (lat == null || long == null) {
       throw Exception('Could not fetch coordinates');
     }
+
 
     final url = Uri.parse(
         'https://maps.googleapis.com/maps/api/geocode/json?latlng=$lat,$long&key=${Env.googleMapsKey}');
